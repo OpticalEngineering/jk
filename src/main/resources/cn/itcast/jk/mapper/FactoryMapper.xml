@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <!-- resultMap映射 -->
    <resultMap type="cn.itcast.jk.domain.Factory" id="factoryRM">
       <!-- 主键 -->
-      <id property="id" column="FCATORY_ID"/>
+      <id property="id" column="FACTORY_ID"/>
       
         <!-- 一般属性 -->
         <result property="fullName" column="FULL_NAME"/> 
@@ -39,13 +39,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           <!-- 查询一个-->
        <select id="get" parameterType="string" resultMap="factoryRM">
         select * from factory_c
-        where FCATORY_ID=#{pid}
+        where FACTORY_ID=#{pid}
         </select>
               
         <!-- 新增 oracle jdbc驱动当这个值为null时，必须告诉当前字段默认值为jdbcType=VARCHAR(mybatis定义)，mysql不用写-->
         <insert id="insert" parameterType="cn.itcast.jk.domain.Factory">
            insert into factory_c
-           (FCATORY_ID,FULL_NAME,FACTORY_NAME,CONTACTS,	PHONE,MOBILE,FAX,NOTE,INSPECTOR,ORDER_NO,STATE,CREATE_BY,CREATE_DEPT,CREATE_TIME)
+           (FACTORY_ID,FULL_NAME,FACTORY_NAME,CONTACTS,	PHONE,MOBILE,FAX,NOTE,INSPECTOR,ORDER_NO,STATE,CREATE_BY,CREATE_DEPT,CREATE_TIME)
            values
            (    #{id},
                 #{fullName,jdbcType=VARCHAR},
@@ -82,19 +82,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
               <if test="state !=null">STATE=#{state,jdbcType=VARCHAR},</if>   
              
            </set>
-           where FCATORY_ID=#{id}
+           where FACTORY_ID=#{id}
            </update> 
             
             <!-- 删除一条-->
           <delete id="deleteById" parameterType="string">
              delete from factory_c
-             where FCATORY_ID=#{pid}
+             where FACTORY_ID=#{pid}
           </delete>
           
             <!-- 删除多条-->
           <delete id="delete" parameterType="string">
              delete from factory_c
-             where FCATORY_ID in
+             where FACTORY_ID in
              <foreach collection="array" item="id" open="(" close=")" separator=",">
              #{id}
              </foreach>
@@ -103,7 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           <!-- 修改状态 -->
           <update id="updateState" parameterType="map">
             update factory_c set state=#{state}
-            where FCATORY_ID in 
+            where FACTORY_ID in 
             <foreach collection="ids" item="id" open="(" close=")" separator=",">
             #{id}
             </foreach>
